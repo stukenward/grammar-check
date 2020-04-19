@@ -54,3 +54,12 @@ adj(young).
 adj(red).
 adj(short).
 adj(tall).
+
+/*rules*/
+s(X,Y) :-
+    pro(X,_,_,_),
+    v(Y,_,_).
+
+s(X,Y) :-
+    det(X,singular),
+    n(Y,singular).
