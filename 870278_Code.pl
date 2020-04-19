@@ -1,3 +1,4 @@
+/*pronouns*/
 pro(i).
 pro(you).
 pro(he).
@@ -16,6 +17,7 @@ pro(us).
 pro(you).
 pro(them).
 
+/*verbs*/
 v(know).
 v(know).
 v(knows).
@@ -25,10 +27,12 @@ v(see).
 v(sees).
 v(see).
 
+/*determiner*/
 det(the).
 det(a).
 det(two).
 
+/*nouns*/
 n(man).
 n(woman).
 n(apple).
@@ -40,10 +44,12 @@ n(apples).
 n(chairs).
 n(rooms).
 
+/*prepositions*/
 prep(on).
 prep(in).
 prep(under).
 
+/*adjectives*/
 adj(old).
 adj(young).
 adj(red).
