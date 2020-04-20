@@ -59,14 +59,14 @@ adj --> [short].
 adj --> [tall].
 
 /*rules*/
-s --> np(subject),vp.
-np(_) --> det(_),nbar.
-np(X) --> pro(_,X,_).
+s --> np(number,subject,tense),vp.
+np(_,_,_) --> det(_),nbar.
+np(_,X,_) --> pro(_,X,_).
 /*np --> det,nbar,pp.*/
 nbar --> n(_).
 nbar --> jp.
 jp --> adj, jp.
 jp --> adj, n(_).
-pp --> prep,np(_).
-vp --> v(_,_), np(_).
+pp --> prep,np(_,_,_).
+vp --> v(_,_), np(_,_,_).
 vp --> v(_,_).
