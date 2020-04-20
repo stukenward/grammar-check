@@ -61,7 +61,7 @@ adj --> [tall].
 /*rules*/
 s --> np(subject),vp.
 np(_) --> det(_),nbar.
-np(X) --> pro(X,_,_).
+np(X) --> pro(_,X,_).
 /*np --> det,nbar,pp.*/
 nbar --> n(_).
 nbar --> jp.
@@ -69,3 +69,4 @@ jp --> adj, jp.
 jp --> adj, n(_).
 pp --> prep,np(_).
 vp --> v(_,_), np(_).
+vp --> v(_,_).
