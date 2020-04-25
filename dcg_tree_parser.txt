@@ -1,0 +1,72 @@
+/*pronouns(word, singular/plural, 1st 2nd or 3rd person, grammatical role(object or subject))*/
+
+pro(pro(i)) --> [i].
+pro(pro(you)) --> [you].
+pro(pro(he)) --> [he].
+pro(pro(she)) --> [she].
+pro(pro(it)) --> [it].
+pro(pro(we)) --> [we].
+pro(pro(you)) --> [you].
+pro(pro(they)) --> [they].
+pro(pro(me)) --> [me].
+pro(pro(you)) --> [you].
+pro(pro(him)) --> [him].
+pro(pro(her)) --> [her].
+pro(pro(it)) --> [it].
+pro(pro(us)) --> [us].
+pro(pro(you)) --> [you].
+pro(pro(them)) --> [them].
+
+/*verbs(word, singular/plural, 1st 2nd or 3rd person)*/
+
+v(v(know)) --> [know].
+v(v(know)) --> [know].
+v(v(knows)) --> [knows]. 
+v(v(know)) --> [know].
+v(v(see)) --> [see].
+v(v(see)) --> [see].
+v(v(sees)) --> [sees].
+v(v(see)) --> [see].
+
+/*determiner(word, singular/plural)*/
+det(det(the)) --> [the].
+det(det(a)) --> [a].
+det(det(two)) --> [two].
+
+/*nouns(word, singular/plural)*/
+
+n(n(man)) --> [man].
+n(n(woman)) --> [woman].
+n(n(apple)) --> [apple].
+n(n(chair)) --> [chair].
+n(n(room)) --> [room].
+n(n(men)) --> [men].
+n(n(women)) --> [women].
+n(n(apples)) --> [apples].
+n(n(chairs)) --> [chairs].
+n(n(rooms)) --> [rooms].
+
+/*prepositions*/
+prep(prep(on)) --> [on].
+prep(prep(in)) --> [in].
+prep(prep(under)) --> [under].
+
+/*adjectives*/
+adj(adj(old)) --> [old].
+adj(adj(young)) --> [young].
+adj(adj(red)) --> [red].
+adj(adj(short)) --> [short].
+adj(adj(tall)) --> [tall].
+
+/*rules*/
+s(s(NP,VP)) --> np(NP),vp(VP).
+np(np(DET,N)) --> det(DET),nbar(N).
+np(np(PRO)) --> pro(PRO).
+np(np(DET,N,PP)) --> det(DET),nbar(N),pp(PP).
+nbar(nbar(N)) --> n(N).
+nbar(nbar(JP)) --> jp(JP).
+jp(jp(ADJ,JP)) --> adj(ADJ), jp(JP).
+jp(jp(ADJ,N)) --> adj(ADJ), n(N).
+pp(pp(PREP,NP)) --> prep(PREP),np(NP).
+vp(vp(V,NP)) --> v(V), np(NP).
+vp(vp(V)) --> v(V).
