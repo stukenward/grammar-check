@@ -1,58 +1,58 @@
 /* Example test sentences with outputs:
  * 1.
- * Input: s(T,[the,woman,sees,the,apples], [])
- * Output: T = s(np(det(the), nbar(n(woman))), vp(v(sees), np(det(the), nbar(n(apples)))))
+ * Input: s(Tree,[the,woman,sees,the,apples], [])
+ * Output: Tree = s(np(det(the), nbar(n(woman))), vp(v(sees), np(det(the), nbar(n(apples)))))
  * 2.
- * Input: s(T,[a,woman,knows,him], [])
- * Output: T = s(np(det(a), nbar(n(woman))), vp(v(knows), np(pro(him))))
+ * Input: s(Tree,[a,woman,knows,him], [])
+ * Output: Tree = s(np(det(a), nbar(n(woman))), vp(v(knows), np(pro(him))))
  * 3.
- * Input: s(T,[two,woman,sees,a,man], [])
+ * Input: s(Tree,[two,woman,sees,a,man], [])
  * Output: false
  * 4.
- * Input: s(T,[two,women,see,a,man], [])
- * Output: T = s(np(det(two), nbar(n(women))), vp(v(see), np(det(a), nbar(n(man)))))
+ * Input: s(Tree,[two,women,see,a,man], [])
+ * Output: Tree = s(np(det(two), nbar(n(women))), vp(v(see), np(det(a), nbar(n(man)))))
  * 5.
- * Input: s(T,[the,man,see,the,apples], [])
+ * Input: s(Tree,[the,man,see,the,apples], [])
  * Output: false
  * 6.
- * Input: s(T,[the,men,see,the,apples], [])
- * Output: T = s(np(det(the), nbar(n(men))), vp(v(see), np(det(the), nbar(n(apples)))))
+ * Input: s(Tree,[the,men,see,the,apples], [])
+ * Output: Tree = s(np(det(the), nbar(n(men))), vp(v(see), np(det(the), nbar(n(apples)))))
  * 7.
- * Input: s(T,[the,men,sees,the,apples], [])
+ * Input: s(Tree,[the,men,sees,the,apples], [])
  * Output: false
  * 8.
- * Input: s(T,[she,knows,the,man], [])
- * Output: T = s(np(pro(she)), vp(v(knows), np(det(the), nbar(n(man)))))
+ * Input: s(Tree,[she,knows,the,man], [])
+ * Output: Tree = s(np(pro(she)), vp(v(knows), np(det(the), nbar(n(man)))))
  * 9.
- * Input: s(T,[she,know,the,man], [])
+ * Input: s(Tree,[she,know,the,man], [])
  * Output: false
  * 10.
- * Input: s(T,[us,sees,the,apple], [])
+ * Input: s(Tree,[us,sees,the,apple], [])
  * Output: false
  * 11.
- * Input: s(T,[i,know,a,short,man], [])
- * Output: T = s(np(pro(i)), vp(v(know), np(det(a), nbar(jp(adj(short), n(man))))))
+ * Input: s(Tree,[i,know,a,short,man], [])
+ * Output: Tree = s(np(pro(i)), vp(v(know), np(det(a), nbar(jp(adj(short), n(man))))))
  * 12.
- * Input: s(T,[the,tall,woman,sees,the,red], [])
+ * Input: s(Tree,[the,tall,woman,sees,the,red], [])
  * Output: false
  * 13.
- * Input: s(T,[the,young,tall,man,knows,the,old,short,woman], [])
- * Output: T = s(np(det(the), nbar(jp(adj(young), jp(adj(tall), n(man))))), vp(v(knows), np(det(the), nbar(jp(adj(old), jp(adj(short), n(woman)))))))
+ * Input: s(Tree,[the,young,tall,man,knows,the,old,short,woman], [])
+ * Output: Tree = s(np(det(the), nbar(jp(adj(young), jp(adj(tall), n(man))))), vp(v(knows), np(det(the), nbar(jp(adj(old), jp(adj(short), n(woman)))))))
  * 14.
- * Input: s(T,[a,man,tall,knows,the,short,woman], [])
+ * Input: s(Tree,[a,man,tall,knows,the,short,woman], [])
  * Output: false
  * 15.
- * Input: s(T,[a,man,on,a,chair,sees,a,woman,in,a,room], [])
- * Output: T = s(np(det(a), nbar(n(man)), pp(prep(on), np(det(a), nbar(n(chair))))), vp(v(sees), np(det(a), nbar(n(woman)), pp(prep(in), np(det(a), nbar(n(room)))))))
+ * Input: s(Tree,[a,man,on,a,chair,sees,a,woman,in,a,room], [])
+ * Output: Tree = s(np(det(a), nbar(n(man)), pp(prep(on), np(det(a), nbar(n(chair))))), vp(v(sees), np(det(a), nbar(n(woman)), pp(prep(in), np(det(a), nbar(n(room)))))))
  * 16.
- * Input: s(T,[a,man,on,a,chair,sees,a,woman,a,room,in], [])
+ * Input: s(Tree,[a,man,on,a,chair,sees,a,woman,a,room,in], [])
  * Output: false
  * 17.
- * Input: s(T,[the,tall,young,woman,in,a,room,sees,the,red,apples,under,the,chair], [])
- * Output: T = s(np(det(the), nbar(jp(adj(tall), jp(adj(young), n(woman)))), pp(prep(in), np(det(a), nbar(n(room))))), vp(v(sees), np(det(the), nbar(jp(adj(red), n(apples))), pp(prep(under), np(det(the), nbar(n(chair)))))))
+ * Input: s(Tree,[the,tall,young,woman,in,a,room,sees,the,red,apples,under,the,chair], [])
+ * Output: Tree = s(np(det(the), nbar(jp(adj(tall), jp(adj(young), n(woman)))), pp(prep(in), np(det(a), nbar(n(room))))), vp(v(sees), np(det(the), nbar(jp(adj(red), n(apples))), pp(prep(under), np(det(the), nbar(n(chair)))))))
  * 18.
- * Input: s(T,[the,woman,in,a,room,on,the,chair,in,a,room,in,the,room,sees,the,man], [])
- * Output: T = s(np(det(the), nbar(n(woman)), pp(prep(in), np(det(a), nbar(n(room)), pp(prep(on), np(det(the), nbar(n(chair)), pp(prep(in), np(det(a), nbar(n(room)), pp(prep(in), np(det(the), nbar(n(room))))))))))), vp(v(sees), np(det(the), nbar(n(man)))))
+ * Input: s(Tree,[the,woman,in,a,room,on,the,chair,in,a,room,in,the,room,sees,the,man], [])
+ * Output: Tree = s(np(det(the), nbar(n(woman)), pp(prep(in), np(det(a), nbar(n(room)), pp(prep(on), np(det(the), nbar(n(chair)), pp(prep(in), np(det(a), nbar(n(room)), pp(prep(in), np(det(the), nbar(n(room))))))))))), vp(v(sees), np(det(the), nbar(n(man)))))
 */
 
 /*pronouns(word,pronoun/noun,singular/plural, 1st 2nd or 3rd person, grammatical role(object or subject))*/
