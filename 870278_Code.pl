@@ -58,15 +58,19 @@ adj --> [red].
 adj --> [short].
 adj --> [tall].
 
-/*rules*/
-s --> np(_,_,_),vp.
-np(X,_,_) --> det(X),nbar(X).
-np(_,Y,_) --> pro(_,Y,_).
+/*rules (X is singular/plural, Y is subject/object)
+ * Z is 1st/2nd/3rd person)*/
+s --> np(_,subject,1),vp(_,1).
+s --> np(_,subject,2),vp(_,2).
+s --> np(singular,subject,3),vp(singular,3).
+s --> np(plural,subject,3),vp(plural,3).
+np(X,_,_) --> det(X),nbar(X). /*perfect*/
+np(X,Y,Z) --> pro(X,Y,Z).
 np(X,_,_) --> det(X),nbar(X),pp.
 nbar(X) --> n(X).
-nbar(_) --> jp.
-jp --> adj, jp.
-jp --> adj, n(_).
+nbar(X) --> jp(X).
+jp(X) --> adj, jp(X).
+jp(X) --> adj, n(X).
 pp --> prep,np(_,_,_).
-vp --> v(_,_), np(_,_,_).
-vp --> v(_,_).
+vp(X,Z) --> v(X,Z), np(_,object,Z).
+vp(X,Z) --> v(X,Z).
