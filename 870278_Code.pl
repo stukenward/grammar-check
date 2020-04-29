@@ -58,10 +58,8 @@ adj(adj(tall)) --> [tall].
 /*rules*/
 s(s(NP,VP)) --> np(NP,pronoun,_,subject,1),vp(VP,_,1).
 s(s(NP,VP)) --> np(NP,pronoun,_,subject,2),vp(VP,_,2).
-s(s(NP,VP)) --> np(NP,pronoun,singular,subject,3),vp(VP,singular,3).
-s(s(NP,VP)) --> np(NP,pronoun,plural,subject,3),vp(VP,plural,3).
-s(s(NP,VP)) --> np(NP,noun,singular,subject,3),vp(VP,singular,3).
-s(s(NP,VP)) --> np(NP,noun,plural,subject,3),vp(VP,plural,3).
+s(s(NP,VP)) --> np(NP,_,singular,subject,3),vp(VP,singular,3).
+s(s(NP,VP)) --> np(NP,_,plural,subject,3),vp(VP,plural,3).
 np(np(DET,N),W,X,_,_) --> det(DET,X),nbar(N,W,X).
 np(np(PRO),W,X,Y,Z) --> pro(PRO,W,X,Y,Z).
 np(np(DET,N,PP),W,X,_,_) --> det(DET,X),nbar(N,W,X),pp(PP).
