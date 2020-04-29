@@ -67,6 +67,6 @@ nbar(nbar(N),X) --> n(N,X).
 nbar(nbar(JP),X) --> jp(JP,X).
 jp(jp(ADJ,JP),X) --> adj(ADJ), jp(JP,X).
 jp(jp(ADJ,N),X) --> adj(ADJ), n(N,X).
-pp(pp(PREP,NP)) --> prep(PREP),np(NP,_,_,_).
-vp(vp(V,NP),X,Z) --> v(V,X,Z), np(NP,_,_,_).
+pp(pp(PREP,NP)) --> prep(PREP),np(NP,_,object,_).
+vp(vp(V,NP),X,Z) --> v(V,X,Z), np(NP,_,object,_).
 vp(vp(V),X,Z) --> v(V,X,Z).
