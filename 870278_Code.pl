@@ -1,4 +1,61 @@
-/*pronouns(word, singular/plural, 1st 2nd or 3rd person, grammatical role(object or subject))*/
+/* Example test sentences with outputs:
+ * 1.
+ * Input: s(T,[the,woman,sees,the,apples], [])
+ * Output: T = s(np(det(the), nbar(n(woman))), vp(v(sees), np(det(the), nbar(n(apples)))))
+ * 2.
+ * Input: s(T,[a,woman,knows,him], [])
+ * Output: T = s(np(det(a), nbar(n(woman))), vp(v(knows), np(pro(him))))
+ * 3.
+ * Input: s(T,[two,woman,sees,a,man], [])
+ * Output: false
+ * 4.
+ * Input: s(T,[two,women,see,a,man], [])
+ * Output: T = s(np(det(two), nbar(n(women))), vp(v(see), np(det(a), nbar(n(man)))))
+ * 5.
+ * Input: s(T,[the,man,see,the,apples], [])
+ * Output: false
+ * 6.
+ * Input: s(T,[the,men,see,the,apples], [])
+ * Output: T = s(np(det(the), nbar(n(men))), vp(v(see), np(det(the), nbar(n(apples)))))
+ * 7.
+ * Input: s(T,[the,men,sees,the,apples], [])
+ * Output: false
+ * 8.
+ * Input: s(T,[she,knows,the,man], [])
+ * Output: T = s(np(pro(she)), vp(v(knows), np(det(the), nbar(n(man)))))
+ * 9.
+ * Input: s(T,[she,know,the,man], [])
+ * Output: false
+ * 10.
+ * Input: s(T,[us,sees,the,apple], [])
+ * Output: false
+ * 11.
+ * Input: s(T,[i,know,a,short,man], [])
+ * Output: T = s(np(pro(i)), vp(v(know), np(det(a), nbar(jp(adj(short), n(man))))))
+ * 12.
+ * Input: s(T,[the,tall,woman,sees,the,red], [])
+ * Output: false
+ * 13.
+ * Input: s(T,[the,young,tall,man,knows,the,old,short,woman], [])
+ * Output: T = s(np(det(the), nbar(jp(adj(young), jp(adj(tall), n(man))))), vp(v(knows), np(det(the), nbar(jp(adj(old), jp(adj(short), n(woman)))))))
+ * 14.
+ * Input: s(T,[a,man,tall,knows,the,short,woman], [])
+ * Output: false
+ * 15.
+ * Input: s(T,[a,man,on,a,chair,sees,a,woman,in,a,room], [])
+ * Output: T = s(np(det(a), nbar(n(man)), pp(prep(on), np(det(a), nbar(n(chair))))), vp(v(sees), np(det(a), nbar(n(woman)), pp(prep(in), np(det(a), nbar(n(room)))))))
+ * 16.
+ * Input: s(T,[a,man,on,a,chair,sees,a,woman,a,room,in], [])
+ * Output: false
+ * 17.
+ * Input: s(T,[the,tall,young,woman,in,a,room,sees,the,red,apples,under,the,chair], [])
+ * Output: T = s(np(det(the), nbar(jp(adj(tall), jp(adj(young), n(woman)))), pp(prep(in), np(det(a), nbar(n(room))))), vp(v(sees), np(det(the), nbar(jp(adj(red), n(apples))), pp(prep(under), np(det(the), nbar(n(chair)))))))
+ * 18.
+ * Input: s(T,[the,woman,in,a,room,on,the,chair,in,a,room,in,the,room,sees,the,man], [])
+ * Output: T = s(np(det(the), nbar(n(woman)), pp(prep(in), np(det(a), nbar(n(room)), pp(prep(on), np(det(the), nbar(n(chair)), pp(prep(in), np(det(a), nbar(n(room)), pp(prep(in), np(det(the), nbar(n(room))))))))))), vp(v(sees), np(det(the), nbar(n(man)))))
+*/
+
+/*pronouns(word,pronoun/noun,singular/plural, 1st 2nd or 3rd person, grammatical role(object or subject))*/
 pro(pro(i),pronoun,singular,subject,1) --> [i].
 pro(pro(you),pronoun,singular,subject,2) --> [you].
 pro(pro(he),pronoun,singular,subject,3) --> [he].
@@ -31,7 +88,7 @@ det(det(the),_) --> [the].
 det(det(a),singular) --> [a].
 det(det(two),plural) --> [two].
 
-/*nouns(word, singular/plural)*/
+/*nouns(word,pronoun/noun,singular/plural)*/
 n(n(man),noun,singular) --> [man].
 n(n(woman),noun,singular) --> [woman].
 n(n(apple),noun,singular) --> [apple].
@@ -55,7 +112,11 @@ adj(adj(red)) --> [red].
 adj(adj(short)) --> [short].
 adj(adj(tall)) --> [tall].
 
-/*rules*/
+/*rules 
+ * W is noun/pronoun, 
+ * X is singular/plural,
+ * Y is subject/object
+ * Z is 1st/2nd/3rd person*/
 s(s(NP,VP)) --> np(NP,pronoun,_,subject,1),vp(VP,_,1).
 s(s(NP,VP)) --> np(NP,pronoun,_,subject,2),vp(VP,_,2).
 s(s(NP,VP)) --> np(NP,_,singular,subject,3),vp(VP,singular,3).
@@ -70,3 +131,4 @@ jp(jp(ADJ,N),W,X) --> adj(ADJ), n(N,W,X).
 pp(pp(PREP,NP)) --> prep(PREP),np(NP,_,_,object,_).
 vp(vp(V,NP),X,Z) --> v(V,X,Z), np(NP,_,_,object,_).
 vp(vp(V),X,Z) --> v(V,X,Z).
+
