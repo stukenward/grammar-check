@@ -1,20 +1,20 @@
 /*pronouns(word, singular/plural, 1st 2nd or 3rd person, grammatical role(object or subject))*/
-pro(pro(i),singular,subject,1) --> [i].
-pro(pro(you),singular,subject,2) --> [you].
-pro(pro(he),singular,subject,3) --> [he].
-pro(pro(she),singular,subject,3) --> [she].
-pro(pro(it),singular,subject,3) --> [it].
-pro(pro(we),plural,subject,1) --> [we].
-pro(pro(you),plural,subject,2) --> [you].
-pro(pro(they),plural,subject,3) --> [they].
-pro(pro(me),singular,object,1) --> [me].
-pro(pro(you),singular,object,2) --> [you].
-pro(pro(him),singular,object,3) --> [him].
-pro(pro(her),singular,object,3) --> [her].
-pro(pro(it),singular,object,3) --> [it].
-pro(pro(us),plural,object,1) --> [us].
-pro(pro(you),plural,object,2) --> [you].
-pro(pro(them),plural,object,3) --> [them].
+pro(pro(i),pronoun,singular,subject,1) --> [i].
+pro(pro(you),pronoun,singular,subject,2) --> [you].
+pro(pro(he),pronoun,singular,subject,3) --> [he].
+pro(pro(she),pronoun,singular,subject,3) --> [she].
+pro(pro(it),pronoun,singular,subject,3) --> [it].
+pro(pro(we),pronoun,plural,subject,1) --> [we].
+pro(pro(you),pronoun,plural,subject,2) --> [you].
+pro(pro(they),pronoun,plural,subject,3) --> [they].
+pro(pro(me),pronoun,singular,object,1) --> [me].
+pro(pro(you),pronoun,singular,object,2) --> [you].
+pro(pro(him),pronoun,singular,object,3) --> [him].
+pro(pro(her),pronoun,singular,object,3) --> [her].
+pro(pro(it),pronoun,singular,object,3) --> [it].
+pro(pro(us),pronoun,plural,object,1) --> [us].
+pro(pro(you),pronoun,plural,object,2) --> [you].
+pro(pro(them),pronoun,plural,object,3) --> [them].
 
 /*verbs(word, singular/plural, 1st 2nd or 3rd person)*/
 v(v(know),singular,1) --> [know].
@@ -32,16 +32,16 @@ det(det(a),singular) --> [a].
 det(det(two),plural) --> [two].
 
 /*nouns(word, singular/plural)*/
-n(n(man),singular) --> [man].
-n(n(woman),singular) --> [woman].
-n(n(apple),singular) --> [apple].
-n(n(chair),singular) --> [chair].
-n(n(room),singular) --> [room].
-n(n(men),plural) --> [men].
-n(n(women),plural) --> [women].
-n(n(apples),plural) --> [apples].
-n(n(chairs),plural) --> [chairs].
-n(n(rooms),plural) --> [rooms].
+n(n(man),noun,singular) --> [man].
+n(n(woman),noun,singular) --> [woman].
+n(n(apple),noun,singular) --> [apple].
+n(n(chair),noun,singular) --> [chair].
+n(n(room),noun,singular) --> [room].
+n(n(men),noun,plural) --> [men].
+n(n(women),noun,plural) --> [women].
+n(n(apples),noun,plural) --> [apples].
+n(n(chairs),noun,plural) --> [chairs].
+n(n(rooms),noun,plural) --> [rooms].
 
 /*prepositions*/
 prep(prep(on)) --> [on].
@@ -56,17 +56,19 @@ adj(adj(short)) --> [short].
 adj(adj(tall)) --> [tall].
 
 /*rules*/
-s(s(NP,VP)) --> np(NP,_,subject,1),vp(VP,_,1).
-s(s(NP,VP)) --> np(NP,_,subject,2),vp(VP,_,2).
-s(s(NP,VP)) --> np(NP,singular,subject,3),vp(VP,singular,3).
-s(s(NP,VP)) --> np(NP,plural,subject,3),vp(VP,plural,3).
-np(np(DET,N),X,_,_) --> det(DET,X),nbar(N,X).
-np(np(PRO),X,Y,Z) --> pro(PRO,X,Y,Z).
-np(np(DET,N,PP),X,_,_) --> det(DET,X),nbar(N,X),pp(PP).
-nbar(nbar(N),X) --> n(N,X).
-nbar(nbar(JP),X) --> jp(JP,X).
-jp(jp(ADJ,JP),X) --> adj(ADJ), jp(JP,X).
-jp(jp(ADJ,N),X) --> adj(ADJ), n(N,X).
-pp(pp(PREP,NP)) --> prep(PREP),np(NP,_,object,_).
-vp(vp(V,NP),X,Z) --> v(V,X,Z), np(NP,_,object,_).
+s(s(NP,VP)) --> np(NP,pronoun,_,subject,1),vp(VP,_,1).
+s(s(NP,VP)) --> np(NP,pronoun,_,subject,2),vp(VP,_,2).
+s(s(NP,VP)) --> np(NP,pronoun,singular,subject,3),vp(VP,singular,3).
+s(s(NP,VP)) --> np(NP,pronoun,plural,subject,3),vp(VP,plural,3).
+s(s(NP,VP)) --> np(NP,noun,singular,subject,3),vp(VP,singular,3).
+s(s(NP,VP)) --> np(NP,noun,plural,subject,3),vp(VP,plural,3).
+np(np(DET,N),W,X,_,_) --> det(DET,X),nbar(N,W,X).
+np(np(PRO),W,X,Y,Z) --> pro(PRO,W,X,Y,Z).
+np(np(DET,N,PP),W,X,_,_) --> det(DET,X),nbar(N,W,X),pp(PP).
+nbar(nbar(N),W,X) --> n(N,W,X).
+nbar(nbar(JP),W,X) --> jp(JP,W,X).
+jp(jp(ADJ,JP),W,X) --> adj(ADJ), jp(JP,W,X).
+jp(jp(ADJ,N),W,X) --> adj(ADJ), n(N,W,X).
+pp(pp(PREP,NP)) --> prep(PREP),np(NP,_,_,object,_).
+vp(vp(V,NP),X,Z) --> v(V,X,Z), np(NP,_,_,object,_).
 vp(vp(V),X,Z) --> v(V,X,Z).
