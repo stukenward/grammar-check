@@ -9,19 +9,25 @@ Then input a command on the right text box with the format of s(Tree,[the,woman,
 Project dictionary:
 
 Pronouns: 
+
 i, you, we, she, it, they, me, him, her, us, them
 
 Verbs:
+
 know, knows, see, sees
 
 Determiner:
+
 the, a, two
 
 Nouns:
+
 man, woman, apple, chair, room, men, women, apples, chairs, rooms
 
 Prepositions:
+
 on, in, under
 
-Adjectives
+Adjectives:
+
 old, young, red, short, tall
